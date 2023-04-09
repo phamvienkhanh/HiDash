@@ -7,15 +7,19 @@ TestCase {
     name: "TestTools"
 
     function initTestCase() {
-        console.log("init")
     }
 
     function cleanupTestCase() {
     }
 
-    function test_case1() {
-        LazyTools.callback(function () {
-            console.log("hahaha")
+    function test_delay_call() {
+        let checkCallback = false
+        LazyTools.delayCall(100, function () {
+            checkCallback = true
         })
+
+        wait(200)
+
+        verify(checkCallback, "test delay call")
     }
 }

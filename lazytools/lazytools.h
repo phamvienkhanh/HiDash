@@ -11,11 +11,18 @@ class LazyTools : public QObject
     QML_SINGLETON
 
 public:
-    Q_INVOKABLE void callback(QJSValue calbcak);
+    Q_INVOKABLE void delayCall(qint32 ms, QJSValue callback);
 
 public:
     explicit LazyTools(QObject *parent = nullptr);
     ~LazyTools() override;
+
+
+protected:
+    void timerEvent(QTimerEvent * event) override;
+
+private:
+    QHash<qint32, QJSValue> _delayCalls;
 };
 
 #endif // LAZYTOOLS_H
