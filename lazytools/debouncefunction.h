@@ -34,6 +34,7 @@ private:
     InitParams _params;
     qint32 _timeId = 0;
     qint64 _lastTimeCall = 0;
+    bool _isSequenceFinished = true;
 
 };
 

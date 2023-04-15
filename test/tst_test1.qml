@@ -18,7 +18,7 @@ TestCase {
 
     function test_delay_call() {
         let checkCallback = false
-        LazyTools.delayCall(100, function () {
+        LazyTools.delay(100, function () {
             checkCallback = true
         })
 
@@ -27,7 +27,32 @@ TestCase {
         verify(checkCallback, "test delay call")
     }
 
+    function test_debounce_call () {
+        let checkCallback = false
+        let debounce = LazyTools.debounce(this, function () {
+            checkCallback = true
+        }, 1000, {leading: true, trailing: true, maxWait: 120})
+
+        debounce.call()
+        verify(checkCallback, "test leading")
+        checkCallback = false;
+
+        debounce.call()
+        debounce.call()
+        debounce.call()
+
+        verify(!checkCallback, "recheck test leading")
+
+        wait(120)
+        debounce.call()
+        verify(checkCallback, "test maxWait")
+        checkCallback = false;
+
+        wait(1000)
+        verify(checkCallback, "test debounce")
+    }
+
     function cleanupTestCase() {
-        wait(2000)
+
     }
 }

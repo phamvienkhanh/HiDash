@@ -18,10 +18,9 @@ DebounceFunction::~DebounceFunction()
 
 void DebounceFunction::call()
 {
-    qDebug() << "DebounceFunction::call()";
-
-    if(_params.isLeading) {
+    if(_params.isLeading && _isSequenceFinished) {
         invokeCallback();
+        _isSequenceFinished = false;
     }
 
     if(_params.msMaxWait > 0) {
@@ -31,19 +30,19 @@ void DebounceFunction::call()
         }
     }
 
-    if(_params.isTrailing) {
-        if(_timeId) killTimer(_timeId);
-        _timeId = startTimer(_params.msWait);
-    }
+    if(_timeId) killTimer(_timeId);
+    _timeId = startTimer(_params.msWait);
 }
 
 void DebounceFunction::timerEvent(QTimerEvent* event)
 {
     qint32 tId = event->timerId();
     if(tId == _timeId) {
-        invokeCallback();
-        killTimer(tId);
+        if(_params.isTrailing) invokeCallback();
+
+        killTimer(tId);        
         _timeId = 0;
+        _isSequenceFinished = true;
     }
 }
 

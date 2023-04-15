@@ -20,7 +20,7 @@ DebounceFunction* LazyTools::debounce(QObject* parent, QJSValue callback, qint32
 
     if(maxWait.isNumber()) params.msMaxWait = maxWait.toUInt();
     if(leading.isBool()) params.isLeading = leading.toBool();
-    if(trailing.isBool()) params.isTrailing = trailing.isBool();
+    if(trailing.isBool()) params.isTrailing = trailing.toBool();
 
     auto obj = new DebounceFunction(params);
     return obj;

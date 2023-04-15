@@ -40,8 +40,8 @@ Window {
             height: 100
 
             property var debounce:  LazyTools.debounce(rec, function () {
-                                        console.log("debounce call")
-                                    }, 1000, {})
+//                                        console.log("debounce call")
+                                    }, 1000, {leading: true, trailing: false, maxWait: 300})
 
             Component.onCompleted: {
 //                let debounce =  LazyTools.debounce(rec, function () {
