@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QQmlEngine>
 
+#include "debouncefunction.h"
+
 class LazyTools : public QObject
 {
     Q_OBJECT
@@ -11,7 +13,8 @@ class LazyTools : public QObject
     QML_SINGLETON
 
 public:
-    Q_INVOKABLE void delayCall(qint32 ms, QJSValue callback);
+    Q_INVOKABLE void delay(qint32 ms, QJSValue callback);
+    Q_INVOKABLE DebounceFunction* debounce(QObject* parent, QJSValue callback, qint32 msWait, QJSValue options);
 
 public:
     explicit LazyTools(QObject *parent = nullptr);

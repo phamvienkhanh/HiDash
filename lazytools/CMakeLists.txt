@@ -3,9 +3,9 @@ qt_add_library(LazyTools SHARED)
 qt_add_qml_module(LazyTools
     URI LazyTools
     VERSION 1.0
-    QML_FILES
     SOURCES
-        lazytools.cpp lazytools.h
+        lazytools.h lazytools.cpp
+        debouncefunction.h debouncefunction.cpp
 )
 
 set_target_properties(LazyTools PROPERTIES

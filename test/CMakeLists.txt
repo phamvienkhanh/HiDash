@@ -16,3 +16,15 @@ add_test(NAME tests COMMAND tests)
 
 target_link_libraries(tests PRIVATE Qt6::QuickTest Qt6::Qml LazyTools)
 
+
+##--- ui test -----
+add_executable(test_ui
+    main.cpp
+)
+qt_add_qml_module(test_ui
+    URI TestUi
+    VERSION 1.0
+    QML_FILES main.qml
+)
+target_link_libraries(test_ui PRIVATE Qt6::Quick LazyTools)
+

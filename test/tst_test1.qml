@@ -6,11 +6,15 @@ import LazyTools
 TestCase {
     name: "TestTools"
 
-    function initTestCase() {
+    Rectangle {
+        width: 100
+        height: 100
+        color: "red"
     }
 
-    function cleanupTestCase() {
-    }
+    function initTestCase() {
+
+    }    
 
     function test_delay_call() {
         let checkCallback = false
@@ -21,5 +25,9 @@ TestCase {
         wait(200)
 
         verify(checkCallback, "test delay call")
+    }
+
+    function cleanupTestCase() {
+        wait(2000)
     }
 }
