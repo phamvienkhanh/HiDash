@@ -1,1 +1,1 @@
-# LazyTools
+# HiDash

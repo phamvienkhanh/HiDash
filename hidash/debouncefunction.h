@@ -18,11 +18,11 @@ public:
         bool isTrailing = true;
     };
 
-    Q_INVOKABLE void call();
-
 public:
     explicit DebounceFunction(const InitParams& params);
     ~DebounceFunction();
+
+    Q_INVOKABLE void call();
 
 protected:
     void timerEvent(QTimerEvent* event);

@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Window
 
-import LazyTools
+import HiDash
 
 Window {
     width: 640
@@ -39,14 +39,11 @@ Window {
             width: 100
             height: 100
 
-            property var debounce:  LazyTools.debounce(rec, function () {
+            property var debounce:  HiDash.debounce(rec, function () {
 //                                        console.log("debounce call")
                                     }, 1000, {leading: true, trailing: false, maxWait: 300})
 
             Component.onCompleted: {
-//                let debounce =  LazyTools.debounce(rec, function () {
-//                    console.log("debounce call")
-//                }, 1000, {})
             }
 
             Component.onDestruction: {
@@ -56,8 +53,8 @@ Window {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    debounce.call()
-//                    LazyTools.delay(1000, function () {console.log("delay call")})
+                    debounce()
+//                    let timeId = HiDash.delay(3000, function () {console.log("delay call")})
                 }
             }
         }

@@ -1,13 +1,34 @@
-#include "lazytools.h"
+#include "hidash.h"
 
 #include <QTimerEvent>
 
-void LazyTools::delay(qint32 ms, QJSValue callback)
+HiDash::HiDash(QObject* parent)
+    : QObject(parent)
 {
-    _delayCalls[startTimer(ms)] = callback;
 }
 
-DebounceFunction* LazyTools::debounce(QObject* parent, QJSValue callback, qint32 msWait, QJSValue options)
+HiDash::~HiDash()
+{
+}
+
+qint32 HiDash::delay(qint32 ms, QJSValue callback)
+{
+    auto timerId = startTimer(ms);
+    if(timerId)
+        _delayCalls[timerId] = callback;
+
+    return timerId;
+}
+
+void HiDash::cancel(qint32 timerId)
+{
+    if(timerId && _delayCalls.contains(timerId)) {
+        killTimer(timerId);
+        _delayCalls.remove(timerId);
+    }
+}
+
+DebounceFunction* HiDash::debounce(QObject* parent, QJSValue callback, qint32 msWait, QJSValue options)
 {
     DebounceFunction::InitParams params;
     params.parent = parent;
@@ -26,19 +47,9 @@ DebounceFunction* LazyTools::debounce(QObject* parent, QJSValue callback, qint32
     return obj;
 }
 
-LazyTools::LazyTools(QObject* parent)
-    : QObject(parent)
-{
-}
-
-LazyTools::~LazyTools()
-{
-}
-
-void LazyTools::timerEvent(QTimerEvent* event)
+void HiDash::timerEvent(QTimerEvent* event)
 {
     qint32 timerId = event->timerId();
-    qDebug() << "LazyTools::timerEvent " << timerId;
     if(_delayCalls.contains(timerId)) {
         auto callback = _delayCalls.take(timerId);
         if(callback.isCallable()) {

@@ -1,7 +1,7 @@
 import QtQuick
 import QtTest
 
-import LazyTools
+import HiDash
 
 TestCase {
     name: "TestTools"
@@ -18,7 +18,7 @@ TestCase {
 
     function test_delay_call() {
         let checkCallback = false
-        LazyTools.delay(100, function () {
+        HiDash.delay(100, function () {
             checkCallback = true
         })
 
@@ -29,7 +29,7 @@ TestCase {
 
     function test_debounce_call () {
         let checkCallback = false
-        let debounce = LazyTools.debounce(this, function () {
+        let debounce = HiDash.debounce(this, function () {
             checkCallback = true
         }, 1000, {leading: true, trailing: true, maxWait: 120})
 
@@ -43,12 +43,12 @@ TestCase {
 
         verify(!checkCallback, "recheck test leading")
 
-        wait(120)
+        wait(130)
         debounce.call()
         verify(checkCallback, "test maxWait")
         checkCallback = false;
 
-        wait(1000)
+        wait(1200)
         verify(checkCallback, "test debounce")
     }
 

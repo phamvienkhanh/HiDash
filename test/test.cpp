@@ -24,6 +24,6 @@ public slots:
     }
 };
 
-QUICK_TEST_MAIN_WITH_SETUP(lazytoolstest, Setup)
+QUICK_TEST_MAIN_WITH_SETUP(hidashtest, Setup)
 
 #include "test.moc"
