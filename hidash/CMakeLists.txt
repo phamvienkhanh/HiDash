@@ -5,7 +5,7 @@ qt_add_qml_module(HiDash
     VERSION 1.0
     SOURCES
         hidash.h hidash.cpp
-        debouncefunction.h debouncefunction.cpp
+        functions/debouncefunction.h functions/debouncefunction.cpp
 )
 
 set_target_properties(HiDash PROPERTIES

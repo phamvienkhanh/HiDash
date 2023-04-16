@@ -16,15 +16,31 @@ TestCase {
 
     }    
 
-    function test_delay_call() {
+    function test_delay_call () {
         let checkCallback = false
         HiDash.delay(100, function () {
             checkCallback = true
         })
 
-        wait(200)
+        wait(150)
 
-        verify(checkCallback, "test delay call")
+        verify(checkCallback, "test delay call 1")
+    }
+
+    function test_delay_cancel () {
+        let checkCallback = false
+        let timerId = HiDash.delay(100, function () {
+            checkCallback = true
+        })
+
+        wait(50)
+        HiDash.cancel(timerId)
+
+        verify(!checkCallback, "test delay call 2")
+
+        wait(100)
+
+        verify(!checkCallback, "test delay call 2")
     }
 
     function test_debounce_call () {

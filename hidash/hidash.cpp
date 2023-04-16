@@ -11,7 +11,7 @@ HiDash::~HiDash()
 {
 }
 
-qint32 HiDash::delay(qint32 ms, QJSValue callback)
+qint32 HiDash::delay(qint32 ms, const QJSValue& callback)
 {
     auto timerId = startTimer(ms);
     if(timerId)
@@ -28,7 +28,7 @@ void HiDash::cancel(qint32 timerId)
     }
 }
 
-DebounceFunction* HiDash::debounce(QObject* parent, QJSValue callback, qint32 msWait, QJSValue options)
+DebounceFunction* HiDash::debounce(QObject* parent, const QJSValue& callback, qint32 msWait, const QJSValue& options)
 {
     DebounceFunction::InitParams params;
     params.parent = parent;

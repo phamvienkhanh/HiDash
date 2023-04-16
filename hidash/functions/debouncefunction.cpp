@@ -1,4 +1,4 @@
-#include "debouncefunction.h"
+#include "functions/debouncefunction.h"
 
 #include <QDateTime>
 #include <QTimerEvent>

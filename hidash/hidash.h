@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QQmlEngine>
 
-#include "debouncefunction.h"
+#include "functions/debouncefunction.h"
 
 class HiDash : public QObject
 {
@@ -17,10 +17,11 @@ public:
     ~HiDash() override;
 
 public:
-    Q_INVOKABLE qint32 delay(qint32 ms, QJSValue callback);
+    Q_INVOKABLE qint32 delay(qint32 ms, const QJSValue& callback);
     Q_INVOKABLE void cancel(qint32 timeId);
 
-    Q_INVOKABLE DebounceFunction* debounce(QObject* parent, QJSValue callback, qint32 msWait, QJSValue options);
+    Q_INVOKABLE DebounceFunction* debounce(QObject* parent, const QJSValue& callback, qint32 msWait,
+                                           const QJSValue& options);
 
 protected:
     void timerEvent(QTimerEvent * event) override;
