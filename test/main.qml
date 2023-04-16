@@ -53,7 +53,7 @@ Window {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    debounce()
+                    debounce.call()
 //                    let timeId = HiDash.delay(3000, function () {console.log("delay call")})
                 }
             }
